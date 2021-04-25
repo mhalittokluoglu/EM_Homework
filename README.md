@@ -16,4 +16,9 @@ Prof. Dr. Erkan AFACAN
 ---
 
 Homework 1 can be found in HW1 directory.
-Code written in **C++** Programming Language.
+Code is written in **C++** Programming Language.
+
+---
+
+Homework 2 can be found in HW2 directory.
+Code is written in **MATLAB** script.
