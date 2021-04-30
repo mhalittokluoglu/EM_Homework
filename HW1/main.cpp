@@ -92,7 +92,7 @@ void print_grids(double grid[ROW][COLUMN])
     {
         for (int j = 0; j < COLUMN; j++)
         {
-            if (i < j)
+            if (i < j) // Print needed elements
             {
                 continue;
             }
@@ -117,14 +117,14 @@ void iterate(double grid[ROW][COLUMN], double* error_prcent)
     {
         for (int j = 0; j < COLUMN; j++)
         {
-            if (i <= j || i == ROW - 1 || j == 0) // If the grid is on the line
+            if (i <= j || i == ROW - 1 || j == 0) // If the grid is on the line and out of the boundaries
             {
                 continue; // Do not change anything and continue
             }
             if (i > 0 && i < ROW - 1 && j > 0 && j < COLUMN - 1)
             {
                 /*
-                If grid is not on the line and the grid is not in the first row or the last row or the first row or the last column
+                If grid is not on the line and the grid is not out of shape boundaries
                 Then sum four of the grid around the current grid and divide them by 4
                 */
                 grid[i][j] = (grid[i - 1][j] + grid[i + 1][j] + grid[i][j - 1] + grid[i][j + 1]) / 4;
