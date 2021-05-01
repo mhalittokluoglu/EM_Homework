@@ -19,20 +19,21 @@ Muhammed Halit TOKLUOĞLU 161110070
 /* FUNCTION DEFINITIONS */
 void set_initial_conditions(double grid[ROW][COLUMN]);
 void print_grids(double grid[ROW][COLUMN]);
-void iterate(double grid[ROW][COLUMN], double* error_prcent);
+void iterate(double grid[ROW][COLUMN], bool* is_satisfied, double* error_percent);
 
 int main(int argc, char* argv[]) // Main Function
 {
     int iterate_number = 0;
     double grids[ROW][COLUMN] = { 0 }; // Creating grids 12 gaps x 12 gaps  = 13 grids x 13 grids
     double error_percent = 1000; // Error in percentage
+    bool is_satisfied = false;
     // print_grids(grids);
     set_initial_conditions(grids); // Creating the shape on grids
     print_grids(grids); // Printing the shape
-    while (error_percent > 1) // While the maximum error is bigger than 1%, make iteration.
+    while (!is_satisfied) // While the maximum error is bigger than 1%, make iteration.
     {
         iterate_number++;
-        iterate(grids, &error_percent);
+        iterate(grids, &is_satisfied, &error_percent);
         /*
         std::cout << "Error: " << error_percent << std::endl;
         std::cout << "Iteration: " << iterate_number << std::endl;
@@ -103,7 +104,7 @@ void print_grids(double grid[ROW][COLUMN])
     printf("\n");
 }
 
-void iterate(double grid[ROW][COLUMN], double* error_prcent)
+void iterate(double grid[ROW][COLUMN], bool* is_satisfied, double* error_percent)
 {
     double grid_prev[ROW][COLUMN];
     for (int i = 0; i < ROW; i++)
@@ -132,21 +133,31 @@ void iterate(double grid[ROW][COLUMN], double* error_prcent)
         }
     }
     double temp; // temporary double variable for holding the errors
+    double temp_percent;
+    double temp_max_percent = 0;
     double temp_max_error = 0; // The max error between iterations
     for (int i = 0; i < ROW; i++)
     {
         for (int j = 0; j < COLUMN; j++)
         {
-            temp = (grid[i][j] - grid_prev[i][j]) * 100 / grid[i][j];
+            temp = (grid[i][j] - grid_prev[i][j]);
+            temp_percent = 100*(grid[i][j] - grid_prev[i][j])/grid[i][j];
             if (temp < 0) // If it is negative, make it positive
             {
                 temp = -1 * temp;
+                temp_percent = -1 * temp_percent;
             }
             if (temp_max_error < temp)
             {
                 temp_max_error = temp;
+                temp_max_percent = temp_percent;
+
             }
         }
-        *error_prcent = temp_max_error;
     }
+    *error_percent = temp_max_percent;
+        if(temp_max_error<0.01)
+        {
+            *is_satisfied = true;
+        }
 }
