@@ -26,11 +26,11 @@ int main(int argc, char* argv[]) // Main Function
     int iterate_number = 0;
     double grids[ROW][COLUMN] = { 0 }; // Creating grids 12 gaps x 12 gaps  = 13 grids x 13 grids
     double error_percent = 1000; // Error in percentage
-    bool is_satisfied = false;
+    bool is_satisfied = false; // Two digit after decimal point shall not change
     // print_grids(grids);
     set_initial_conditions(grids); // Creating the shape on grids
     print_grids(grids); // Printing the shape
-    while (!is_satisfied) // While the maximum error is bigger than 1%, make iteration.
+    while (!is_satisfied) // While condition is not satisfied.
     {
         iterate_number++;
         iterate(grids, &is_satisfied, &error_percent);
