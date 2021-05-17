@@ -74,7 +74,8 @@ end
 %Applying formulas in lecture note of FDTD 5 (Week 7) in order to calculate Hz and Ey in interval [1,512]
 
 temp = 0;
-while 1
+is_figure = figure;
+while ishandle(is_figure)
   for i = 1:512
     if i == 1
       Hz(1) = Hz(i) - (Ey(2)-Ey(1))*delta_t/(delta_x*mu(1));

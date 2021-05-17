@@ -1,35 +1,35 @@
-function varargout = group2_homework2(varargin)
-% GROUP2_HOMEWORK2 MATLAB code for group2_homework2.fig
-%      GROUP2_HOMEWORK2, by itself, creates a new GROUP2_HOMEWORK2 or raises the existing
+function varargout = Group1_Homework2(varargin)
+% GROUP1_HOMEWORK2 MATLAB code for Group1_Homework2.fig
+%      GROUP1_HOMEWORK2, by itself, creates a new GROUP1_HOMEWORK2 or raises the existing
 %      singleton*.
 %
-%      H = GROUP2_HOMEWORK2 returns the handle to a new GROUP2_HOMEWORK2 or the handle to
+%      H = GROUP1_HOMEWORK2 returns the handle to a new GROUP1_HOMEWORK2 or the handle to
 %      the existing singleton*.
 %
-%      GROUP2_HOMEWORK2('CALLBACK',hObject,eventData,handles,...) calls the local
-%      function named CALLBACK in GROUP2_HOMEWORK2.M with the given input arguments.
+%      GROUP1_HOMEWORK2('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in GROUP1_HOMEWORK2.M with the given input arguments.
 %
-%      GROUP2_HOMEWORK2('Property','Value',...) creates a new GROUP2_HOMEWORK2 or raises the
+%      GROUP1_HOMEWORK2('Property','Value',...) creates a new GROUP1_HOMEWORK2 or raises the
 %      existing singleton*.  Starting from the left, property value pairs are
-%      applied to the GUI before group2_homework2_OpeningFcn gets called.  An
+%      applied to the GUI before Group1_Homework2_OpeningFcn gets called.  An
 %      unrecognized property name or invalid value makes property application
-%      stop.  All inputs are passed to group2_homework2_OpeningFcn via varargin.
+%      stop.  All inputs are passed to Group1_Homework2_OpeningFcn via varargin.
 %
 %      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
 %      instance to run (singleton)".
 %
 % See also: GUIDE, GUIDATA, GUIHANDLES
 
-% Edit the above text to modify the response to help group2_homework2
+% Edit the above text to modify the response to help Group1_Homework2
 
-% Last Modified by GUIDE v2.5 01-May-2021 17:52:41
+% Last Modified by GUIDE v2.5 17-May-2021 23:10:34
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
 gui_State = struct('gui_Name',       mfilename, ...
                    'gui_Singleton',  gui_Singleton, ...
-                   'gui_OpeningFcn', @group2_homework2_OpeningFcn, ...
-                   'gui_OutputFcn',  @group2_homework2_OutputFcn, ...
+                   'gui_OpeningFcn', @Group1_Homework2_OpeningFcn, ...
+                   'gui_OutputFcn',  @Group1_Homework2_OutputFcn, ...
                    'gui_LayoutFcn',  [] , ...
                    'gui_Callback',   []);
 if nargin && ischar(varargin{1})
@@ -44,15 +44,16 @@ end
 % End initialization code - DO NOT EDIT
 
 
-% --- Executes just before group2_homework2 is made visible.
-function group2_homework2_OpeningFcn(hObject, eventdata, handles, varargin)
+
+% --- Executes just before Group1_Homework2 is made visible.
+function Group1_Homework2_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-% varargin   command line arguments to group2_homework2 (see VARARGIN)
+% varargin   command line arguments to Group1_Homework2 (see VARARGIN)
 
-% Choose default command line output for group2_homework2
+% Choose default command line output for Group1_Homework2
 handles.output = hObject;
 
 % Update handles structure
@@ -62,12 +63,12 @@ is_first_start = 1;
 initial_conditions;
 plot_script;
 
-% UIWAIT makes group2_homework2 wait for user response (see UIRESUME)
+% UIWAIT makes Group1_Homework2 wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
 
 % --- Outputs from this function are returned to the command line.
-function varargout = group2_homework2_OutputFcn(hObject, eventdata, handles) 
+function varargout = Group1_Homework2_OutputFcn(hObject, eventdata, handles) 
 % varargout  cell array for returning output args (see VARARGOUT);
 % hObject    handle to figure
 % eventdata  reserved - to be defined in a future version of MATLAB
@@ -78,9 +79,9 @@ varargout{1} = handles.output;
 
 
 
-% --- Executes on button press in pushbutton1.
-function pushbutton1_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton1 (see GCBO)
+% --- Executes on button press in start_button.
+function start_button_Callback(hObject, eventdata, handles)
+% hObject    handle to start_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global is_running;
@@ -96,9 +97,9 @@ iterate_still_running(hObject, eventdata, handles);
 
 
 
-% --- Executes on button press in pushbutton2.
-function pushbutton2_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton2 (see GCBO)
+% --- Executes on button press in stop_button.
+function stop_button_Callback(hObject, eventdata, handles)
+% hObject    handle to stop_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global is_running;
@@ -322,9 +323,9 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
 end
 
 
-% --- Executes on button press in pushbutton3.
-function pushbutton3_Callback(hObject, eventdata, handles)
-% hObject    handle to pushbutton3 (see GCBO)
+% --- Executes on button press in restart_button.
+function restart_button_Callback(hObject, eventdata, handles)
+% hObject    handle to restart_button (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 global is_running;
@@ -338,7 +339,8 @@ plot_script;
 
 function iterate_still_running(hObject, eventdata, handles)
 global is_running;
-while is_running
+is_axes = handles.axes1;
+while is_running && ishandle(is_axes)
     iterate;
     plot_script;
     pause(0.01);
