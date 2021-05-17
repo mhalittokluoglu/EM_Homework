@@ -1,5 +1,20 @@
+%{
+        EEE456
+ELECTROMAGNETIC MODELLING HOMEWORK - 1
+GROUP #1
+
+Lecturer: Prof. Dr. Erkan AFACAN
+
+Students:
+Onur AKSOY 161110004
+Mine Nur ÖZER 161110057
+Muhammed Halit TOKLUOĞLU 161110070
+%}
+
+
 clear;
 close all;
+%------Constants------
 ep_1 = 1;
 ep_2 = 4;
 ep_3 = 1;
@@ -42,16 +57,21 @@ sigma(1:250) = sigma_1;
 sigma(251:309) = sigma_2;
 sigma(310:512) = sigma_3;
 
+%---------------------
 
-xp = xcenter*delta_x;
-
+%Allocating an array of 512 elements for both Ey and Hz
 Ey = zeros(1,512);
 Hz = zeros(1,512);
+xp = xcenter*delta_x;
 
+%For excitation, Gaussian Pulse is used.
+%Creating Gaussian Pulse
 for i = 1:512
   Ey(i) = E0*exp(log(0.001)*((i-xp/delta_x)/w)^2);
   Hz(i) = E0/Z0*exp(log(0.001)*((i-xp/delta_x + 1/4)/w)^2);
 end
+
+%Applying formulas in lecture note of FDTD 5 (Week 7) in order to calculate Hz and Ey in interval [1,512]
 
 temp = 0;
 while 1
@@ -76,6 +96,7 @@ while 1
       Ey(i) = ep(i)*Ey(i)/(ep(i)+delta_t*sigma(i)) - (Hz(i)-Hz(i-1))*delta_t/(delta_x*(ep(i)+delta_t*sigma(i)));
     end
   end
+  %Plotting
   plot(n,Ey);
   line([250 250],[-10 10]);
   line([309 309],[-10 10]);
