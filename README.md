@@ -22,3 +22,10 @@ Code is written in **C++** Programming Language.
 
 Homework 2 can be found in HW2 directory.
 Code is written in **MATLAB** script.
+
+---
+
+Homework 3 can be found in HW3 directory.
+Code is written in **C++** Programming Language.
+
+---
